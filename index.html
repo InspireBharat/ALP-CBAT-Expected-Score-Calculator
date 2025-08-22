@@ -559,7 +559,7 @@ input[type="date"]::after {
 
 <script>
 /* ===== CONFIG ===== */
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxs4L_8ZTC8GpW8zmiJ8kMg3rrlO3pIb7uqFtvIfUALuA9aCtJIIspjGMvZvC_ZJGw/exec"; // <-- set me
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwS_z-uoiyp3Y95nqZ8E0wQoNr4fZiiVd5Jv_o44Impu2di-7nk22JOzL0I3qqnmgg8/exec"; // <-- set me
 
 /* ===== UTIL ===== */
 const qs = sel => document.querySelector(sel);
@@ -569,7 +569,7 @@ function toast(msg, type='info'){
 }
 function scrollToTop(){ window.scrollTo({top:0, behavior:'smooth'}); }
 
-/* ===== INIT ===== */
+/*
 const pathIsAdmin =  location.pathname.endsWith('#admin') // || location.pathname.endsWith('/admin');
 document.addEventListener('DOMContentLoaded', () => {
   if (pathIsAdmin) {
@@ -582,7 +582,7 @@ document.addEventListener('DOMContentLoaded', () => {
     buildForm();
   }
 });
-
+*/
 
 // ====== Date formatting ======
 function formatDateISOtoDisplay(dateStr){
@@ -693,42 +693,41 @@ function buildForm(){
   addField('Enter exact 15-digit roll no (ALP 2024 CBAT held on 15-July-2025) [So you can later check updated Avg & T-score]<br>सटीक 15-अंकीय रोल नंबर दर्ज करें (ALP 2024 CBAT 15-जुलाई-2025 को आयोजित) [ताकि आप बाद में अपडेट किए गए औसत और टी-स्कोर की जांच कर सकें] :-', 'RollNo', 'text', { required:'required', pattern:'\\d{15}', maxlength:'15' });
   document.querySelector('#RollNo').parentElement.className = 'field col-12';
 
-  // 3) CBT-2 Part A Marks (0..100)
+  // 3) Category
+  addSelect('Category<br>कैटेगरी', 'Category', ['UR','EWS','OBC','SC','ST'], { required:'required' });
+
+
+  // 4) CBT-2 Part A Marks (0..100)
   addNumber('CBT-2 Part A Marks (As per Score Card Exact Marks) (0-100)<br>सीबीटी-2 भाग ए के अंक (स्कोर कार्ड के अनुसार सटीक अंक) :-', 'PartAMarks', 0, 100);
 
-  // 4) Zone
+  // 5) Zone
   addSelect('RRB Zone (as per application form)<br>आरआरबी जोन (आवेदन पत्र के अनुसार) :-', 'Zone', [
     'Ahmedabad','Ajmer','Bangalore','Bhopal','Bhubaneswar','Bilaspur','Chandigarh',
     'Chennai','Gorakhpur','Guwahati','Jammu and Srinagar','Kolkata','Malda','Mumbai',
     'Muzaffarpur','Patna','Prayagraj','Ranchi','Secunderabad','Siliguri','Thiruvananthapuram'
   ], { required:'required' });
 
-  // 5) Exam Date (default 15-July-2024 but user can edit)
-  addField('CBAT Exam Date (default 15-July-2024)', 'ExamDate', 'date', { required:'required', value:'2025-07-15' });
+  // 6) Exam Date (default 15-July-2024 but user can edit)
+  addField('CBAT Exam Date (default 15-July-2024)<br>सीबीएटी परीक्षा तिथि (डिफ़ॉल्ट 15-जुलाई-2024)', 'ExamDate', 'date', { required:'required', value:'2025-07-15' });
 
-  // 6) Shift (1st/2nd/3rd)
-  addSelect('Shift', 'Shift', ['1st','2nd','3rd'], { required:'required' });
+  // 7) Shift (1st/2nd/3rd)
+  addSelect('Shift<br>शिफ्ट', 'Shift', ['1st','2nd','3rd'], { required:'required' });
 
   // Batteries: Attempts + Accuracy
-  // 7/8) Memory (0..24), (0..100)
-  addNumber('Battery 1 🧠 Memory (Figure-Find) Attempts (0-24)', 'Mem_Attempts', 0, 24);
-  addNumber('Avg accuracy % for Battery 1 (0-100)', 'Mem_Accuracy', 0, 100);
+  // 8) Memory (0..24), (0..100)
+  addNumber('Battery 1 🧠 Memory (Figure-Find) <strong><u>Correct Attempts (0-24)</u></strong><br>बैटरी 1 🧠 मेमोरी (आकृति-खोज) <strong><u>सही प्रयास (0-24)</u></strong>', 'Mem_Correct', 0, 24);
 
-  // 9/10) Directions (0..20), (0..100)
-  addNumber('Battery 2 🕒 Directions (Watch) Attempts (0-20)', 'Dir_Attempts', 0, 20);
-  addNumber('Avg accuracy % for Battery 2 (0-100)', 'Dir_Accuracy', 0, 100);
+  // 9) Directions (0..20), (0..100)
+  addNumber('Battery 2 🕒 Directions (Watch) <strong><u>Correct Attempts (0-20)</u></strong><br>बैटरी 2 🕒 दिशा-निर्देश (देखें) <strong><u>सही प्रयास (0-20)</u></strong>', 'Dir_Correct', 0, 20);
 
-  // 11/12) Depth Perception (0..50), (0..100)
-  addNumber('Battery 3 🧊 Depth Perception (Hidden Cube) Attempts (0-50)', 'Depth_Attempts', 0, 50);
-  addNumber('Avg accuracy % for Battery 3 (0-100)', 'Depth_Accuracy', 0, 100);
+  // 10) Depth Perception (0..50), (0..100)
+  addNumber('Battery 3 🧊 Depth Perception (Hidden Cube) <strong><u>Correct Attempts (0-50)</u></strong><br>बैटरी 3 🧊 गहराई बोध (हिडन क्यूब) <strong><u>सही प्रयास (0-50)</u></strong>', 'Depth_Correct', 0, 50);
 
-  // 13/14) Concentration (0..60), (0..100)
-  addNumber('Battery 4 🎯 Concentration (Figure Placement) Attempts (0-60)', 'Conc_Attempts', 0, 60);
-  addNumber('Avg accuracy % for Battery 4 (0-100)', 'Conc_Accuracy', 0, 100);
+  // 11) Concentration (0..60), (0..100)
+  addNumber('Battery 4 🎯 Concentration (Figure Placement) <strong><u>Correct Attempts (0-60)</u></strong><br>बैटरी 4 🎯 एकाग्रता (आकृति प्लेसमेंट) <strong><u>सही प्रयास (0-60)</u></strong>', 'Conc_Correct', 0, 60);
 
-  // 15/16) Perceptual Speed (0..72), (0..100)
-  addNumber('Battery 5 ⚡ Perceptual Speed (Same Figure Matching) Attempts (0-72)', 'Perc_Attempts', 0, 72);
-  addNumber('Avg accuracy % for Battery 5 (0-100)', 'Perc_Accuracy', 0, 100);
+  // 12) Perceptual Speed (0..72), (0..100)
+  addNumber('Battery 5 ⚡ Perceptual Speed (Same Figure) <strong><u>Correct Attempts (0-72)</u></strong><br>बैटरी 5 ⚡ अवधारणात्मक गति (समान आकृति मिलान) <strong><u>सही प्रयास (0-72)</u></strong>', 'Perc_Correct', 0, 72);
 
   // submit
   qs('#submitBtn').onclick = onSubmitForm;
@@ -740,25 +739,18 @@ function getFormData(){
   const payload = {
     ReExam: val('ReExam'),
     RollNo: val('RollNo'),
+    Category: val('Category'),
+
     PartAMarks: num('PartAMarks'),
     Zone: val('Zone'),
     ExamDate: val('ExamDate'),
     Shift: val('Shift'),
 
-    Mem_Attempts: num('Mem_Attempts'),
-    Mem_Accuracy: num('Mem_Accuracy'),
-
-    Dir_Attempts: num('Dir_Attempts'),
-    Dir_Accuracy: num('Dir_Accuracy'),
-
-    Depth_Attempts: num('Depth_Attempts'),
-    Depth_Accuracy: num('Depth_Accuracy'),
-
-    Conc_Attempts: num('Conc_Attempts'),
-    Conc_Accuracy: num('Conc_Accuracy'),
-
-    Perc_Attempts: num('Perc_Attempts'),
-    Perc_Accuracy: num('Perc_Accuracy')
+    Mem_Correct: num('Mem_Correct'),
+    Dir_Correct: num('Dir_Correct'),
+    Depth_Correct: num('Depth_Correct'),
+    Conc_Correct: num('Conc_Correct'),
+    Perc_Correct: num('Perc_Correct'),
   };
   return payload;
 }
@@ -767,26 +759,23 @@ function validatePayload(p){
   if (!['Yes','No'].includes(p.ReExam)) return 'Select Re-Exam Yes/No';
   if (!/^\d{15}$/.test(p.RollNo)) return 'Roll No must be exactly 15 digits';
   const inRange = (x,min,max)=> Number.isFinite(x) && x>=min && x<=max;
+  
+  if (!['UR','EWS','OBC','SC','ST'].includes(p.Category)) return 'Select Category';
 
   if (!inRange(p.PartAMarks,0,100)) return 'CBT-2 Part A must be 0..100';
   if (!p.Zone) return 'Select Zone';
   if (!p.ExamDate) return 'Enter Exam Date';
   if (!['1st','2nd','3rd'].includes(p.Shift)) return 'Select Shift';
 
-  if (!inRange(p.Mem_Attempts,0,24)) return 'Battery 1 Attempts 0..24';
-  if (!inRange(p.Mem_Accuracy,0,100)) return 'Battery 1 Accuracy 0..100';
+  if (!inRange(p.Mem_Correct,0,24)) return 'Battery 1 Attempts 0..24';
 
-  if (!inRange(p.Dir_Attempts,0,20)) return 'Battery 2 Attempts 0..20';
-  if (!inRange(p.Dir_Accuracy,0,100)) return 'Battery 2 Accuracy 0..100';
+  if (!inRange(p.Dir_Correct,0,20)) return 'Battery 2 Attempts 0..20';
 
-  if (!inRange(p.Depth_Attempts,0,50)) return 'Battery 3 Attempts 0..50';
-  if (!inRange(p.Depth_Accuracy,0,100)) return 'Battery 3 Accuracy 0..100';
+  if (!inRange(p.Depth_Correct,0,50)) return 'Battery 3 Attempts 0..50';
 
-  if (!inRange(p.Conc_Attempts,0,60)) return 'Battery 4 Attempts 0..60';
-  if (!inRange(p.Conc_Accuracy,0,100)) return 'Battery 4 Accuracy 0..100';
+  if (!inRange(p.Conc_Correct,0,60)) return 'Battery 4 Attempts 0..60';
 
-  if (!inRange(p.Perc_Attempts,0,72)) return 'Battery 5 Attempts 0..72';
-  if (!inRange(p.Perc_Accuracy,0,100)) return 'Battery 5 Accuracy 0..100';
+  if (!inRange(p.Perc_Correct,0,72)) return 'Battery 5 Attempts 0..72';
 
   return null;
 }
@@ -844,6 +833,7 @@ function renderReport(data){
     <h2> 📊 Report for Roll: ${m.roll}</h2>
     <div class="row" style="flex-wrap:wrap">
       <span class="pill">Zone: <strong>${m.zone}</strong></span>
+      <span class="pill">Category: <strong>${m.category}</strong></span>
       <span class="pill">Date: <strong>${formatDateISOtoDisplay(m.examDate)}</strong></span>
       <span class="pill">Shift: <strong>${m.shift}</strong></span>
       <span class="pill">Group: <strong>${m.reportType}</strong></span>
@@ -855,11 +845,11 @@ function renderReport(data){
 
   const rows = [
     ['Battery', 'Mean', 'SD', 'Your Raw X', 'T‑Score'],
-    [' 🧠 ' + data.batteries.B1.name, fmt(data.batteries.B1.mean), fmt(data.batteries.B1.sd), data.batteries.B1.raw, data.batteries.B1.t],
-    [' 🕒 ' + data.batteries.B2.name, fmt(data.batteries.B2.mean), fmt(data.batteries.B2.sd), data.batteries.B2.raw, data.batteries.B2.t],
-    [' 🧊 ' + data.batteries.B3.name, fmt(data.batteries.B3.mean), fmt(data.batteries.B3.sd), data.batteries.B3.raw, data.batteries.B3.t],
-    [' 🎯 ' + data.batteries.B4.name, fmt(data.batteries.B4.mean), fmt(data.batteries.B4.sd), data.batteries.B4.raw, data.batteries.B4.t],
-    [' ⚡ ' + data.batteries.B5.name, fmt(data.batteries.B5.mean), fmt(data.batteries.B5.sd), data.batteries.B5.raw, data.batteries.B5.t]
+    [' 🧠 ' + data.batteries.B1.name, fmt(data.batteries.B1.mean), fmt(data.batteries.B1.sd), data.batteries.B1.correct, data.batteries.B1.t],
+    [' 🕒 ' + data.batteries.B2.name, fmt(data.batteries.B2.mean), fmt(data.batteries.B2.sd), data.batteries.B2.correct, data.batteries.B2.t],
+    [' 🧊 ' + data.batteries.B3.name, fmt(data.batteries.B3.mean), fmt(data.batteries.B3.sd), data.batteries.B3.correct, data.batteries.B3.t],
+    [' 🎯 ' + data.batteries.B4.name, fmt(data.batteries.B4.mean), fmt(data.batteries.B4.sd), data.batteries.B4.correct, data.batteries.B4.t],
+    [' ⚡ ' + data.batteries.B5.name, fmt(data.batteries.B5.mean), fmt(data.batteries.B5.sd), data.batteries.B5.correct, data.batteries.B5.t]
   ];
   let html = `<thead><tr>${rows[0].map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>`;
   for (let i=1;i<rows.length;i++){
@@ -916,6 +906,8 @@ async function downloadCSV(){
   }
 }
 
+/* ===== INIT ===== */
+
 function showAdmin() {
   qs('#adminWrap').style.display = 'block';
   qs('#firstPopup').style.display = 'none';
@@ -926,6 +918,8 @@ function showAdmin() {
 function showUser() {
   qs('#adminWrap').style.display = 'none';
   qs('#firstPopup').style.display = 'flex';
+  qs('#formWrap').style.display = 'none';
+  qs('#reportWrap').style.display = 'none';
   buildForm();
 }
 
@@ -940,7 +934,6 @@ function handleRoute() {
 
 document.addEventListener('DOMContentLoaded', handleRoute);
 window.addEventListener('hashchange', handleRoute); // ✅ switch instantly on # change
-
 
 </script>
 </body>
