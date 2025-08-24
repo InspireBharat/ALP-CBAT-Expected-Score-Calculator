@@ -208,7 +208,7 @@ input[type="date"]::after {
   }
   
   .popup .panel {
-    width: min(520px, 92%);
+    width: min(700px, 92%);
     background: var(--card);
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 18px;
@@ -484,6 +484,80 @@ input[type="date"]::after {
         display:block; 
     }
   }
+
+  .note-box {
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 20px 0;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .note-box h2 {
+    margin-top: 0;
+    color: #ffffff;
+    text-align: center;
+    font-size: 18px;
+  }
+  .note-box ul {
+    padding-left: 20px;
+  }
+  .note-box li {
+    margin-bottom: 12px;
+  }
+  .note-box strong {
+    color: #000;
+  }
+  .yes {
+    color: green;
+    font-weight: bold;
+  }
+  .no {
+    color: red;
+    font-weight: bold;
+  }
+  .info-box {
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin: 15px 0;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .info-box h3 {
+    margin-top: 0;
+    font-size: 16px;
+    color: #ffffff;
+  }
+  .info-box ul {
+    padding-left: 18px;
+    margin: 10px 0;
+  }
+  .info-box li {
+    margin-bottom: 10px;
+  }
+  .good {
+    color: green;
+    font-weight: bold;
+  }
+  .bad {
+    color: red;
+    font-weight: bold;
+  }
+  .note-box {
+    border: 2px solid #fbc02d;
+    border-radius: 6px;
+    padding: 12px 15px;
+    margin: 15px 0;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .note-box p {
+    margin: 8px 0;
+  }
+  .note-box strong {
+    color: #d32f2f;
+  }
 </style>
 </head>
 <body>
@@ -506,13 +580,53 @@ input[type="date"]::after {
 <div class="container">
   <div class="card" id="hero">
     <h1>CBAT T‑Score & Overall Score (out of 30)</h1>
-    <p>Auto-calculated from your Battery raw scores within <strong>same Zone + Exam Date + Shift</strong> and grouped by <strong>Re‑Exam</strong> status.</p>
+    <h1>सीबीएटी टी-स्कोर और कुल स्कोर (30 में से)</h1>
+    <p>Auto-calculated from your Battery raw scores within <strong>Same (Zone + Exam Date + Shift)</strong> and grouped by <strong>Re‑Exam</strong> status.</p>
+    <p><strong>समान (जोन + परीक्षा तिथि + शिफ्ट)</strong> और <strong>पुनः परीक्षा</strong> स्थिति के अनुसार समूहीकृत की जाती है।, में आपके बैटरी रॉ स्कोर से स्वचालित रूप से गणना की जाती है</p>
   </div>
 
   <!-- POPUP -->
   <div class="popup" id="firstPopup">
     <div class="panel">
-      <h2>Have you filled the form earlier?</h2>
+      <h1>
+        Have you filled the form earlier?
+        <br>
+        क्या आपने पहले फॉर्म भरा है?        
+      </h1>
+      <div class="note-box">
+        <h2>⚠️ महत्वपूर्ण नोट (Hindi)</h2>
+        <ul>
+          <li>
+            <span class="yes">✔️ Yes</span> पर क्लिक करें और पहले से भरे गए <u>Unique CBAT Roll No</u> से 
+            अपडेटेड औसत और T-Score देखें।  
+            <br><em>👉 केवल स्कोर देखने के लिए दोबारा फॉर्म न भरें।</em>
+          </li>
+          <li>
+            <span class="no">❌ No</span> पर क्लिक करें यदि आप <u>जानकारी अपडेट</u> करना चाहते हैं।  
+            <br>कृपया उसी <u>Unique Roll No</u> और सही जानकारी (Date, Part A Marks, Correct Attempts Battery Wise, Zone, Category, Re-Exam, Shift) के साथ दोबारा फॉर्म भरें।
+          </li>
+          <li>
+            पहली बार फॉर्म भरते समय भी <span class="no">❌ No</span> चुनें और सभी जानकारी सही भरें।
+          </li>
+        </ul>
+
+        <h2>⚠️ Important Note (English)</h2>
+        <ul>
+          <li>
+            Click <span class="yes">✔️ Yes</span> to see Updated Average & T-Score using your 
+            <u>Unique CBAT Roll No</u> (already submitted).  
+            <br><em>👉 Do not refill the form only for checking scores.</em>
+          </li>
+          <li>
+            Click <span class="no">❌ No</span> to <u>Update details</u> with the same Unique RollNo 
+            (Date, Part A Marks, Correct Attempts Battery Wise, Zone, Category, Re-Exam Status, Shift).
+          </li>
+          <li>
+            For first-time submission, choose <span class="no">❌ No</span> and fill correct details.
+          </li>
+        </ul>
+      </div>
+
       <div class="row" style="margin-top:20px">
         <button class="btn" onclick="onPopupAnswer(true)"><i class="fas fa-check"></i> Yes</button>
         <button class="btn secondary" onclick="onPopupAnswer(false)"><i class="fas fa-times"></i> No</button>
@@ -522,9 +636,23 @@ input[type="date"]::after {
 
   <!-- FORM -->
   <div class="card" id="formWrap">
-    <h2>CBAT Details Form</h2>
+    <h2>📋 CBAT Details Form</h2>
     <p><em>All fields are mandatory. (You will get CSV on our Telegram channel.)</em></p>
 
+    <div class="info-box">
+      <h3>⚠️ Important Instructions</h3>
+      <ul>
+        <li>
+          <span class="good">✔️ Fill only once</span>.  
+          To <u>update details</u>, use the <b>same Unique CBAT RollNo</b> you filled the first time.  
+          Enter correct information again (Date, Part A Marks, Battery-wise Attempts, Zone, Category, Re-Exam Status, Shift).
+        </li>
+        <li>
+          <span class="bad">❌ Do not fill fake or incorrect details</span> (e.g. wrong Zone/Shift, Part A Marks, or putting all Battery Attempts as <b>0</b> just to check averages).  
+          <br>👉 Such actions will affect everyone’s <b>Average & T-Score</b>.
+        </li>
+      </ul>
+    </div>
     <form id="cbatForm" class="grid"></form>
 
     <div class="row" style="margin-top:20px">
@@ -569,21 +697,6 @@ function toast(msg, type='info'){
 }
 function scrollToTop(){ window.scrollTo({top:0, behavior:'smooth'}); }
 
-/*
-const pathIsAdmin =  location.pathname.endsWith('#admin') // || location.pathname.endsWith('/admin');
-document.addEventListener('DOMContentLoaded', () => {
-  if (pathIsAdmin) {
-    qs('#adminWrap').style.display = 'block';
-    qs('#firstPopup').style.display = 'none';
-    qs('#formWrap').style.display = 'none';
-    qs('#reportWrap').style.display = 'none';
-  } else {
-    qs('#firstPopup').style.display = 'flex';
-    buildForm();
-  }
-});
-*/
-
 // ====== Date formatting ======
 function formatDateISOtoDisplay(dateStr){
   if (!dateStr) return '';
@@ -600,7 +713,7 @@ function formatDateISOtoDisplay(dateStr){
 function onPopupAnswer(yes){
   qs('#firstPopup').style.display = 'none';
   if (yes){
-    const roll = prompt('Enter your 15 digit ALP 2024 CBAT Roll No:');
+    const roll = prompt('Enter your 15 digit ALP 2024 CBAT Unique Roll No, Which you filled while Submitting the Form :\nअपना 15 अंकों का ALP 2024 CBAT यूनिक रोल नंबर दर्ज करें, जो आपने फॉर्म जमा करते समय भरा था:');
     if (!roll) { qs('#formWrap').style.display = 'block'; return; }
     if (!/^\d{15}$/.test(roll)){ toast('Roll No must be exactly 15 digits.'); qs('#formWrap').style.display='block'; return; }
     fetchReport(roll).then(r=>{
@@ -690,7 +803,7 @@ function buildForm(){
   document.querySelector('#ReExam').parentElement.className = 'field col-12';
 
   // 2) Roll No (15-digit)
-  addField('Enter exact 15-digit roll no (ALP 2024 CBAT held on 15-July-2025) [So you can later check updated Avg & T-score]<br>सटीक 15-अंकीय रोल नंबर दर्ज करें (ALP 2024 CBAT 15-जुलाई-2025 को आयोजित) [ताकि आप बाद में अपडेट किए गए औसत और टी-स्कोर की जांच कर सकें] :-', 'RollNo', 'text', { required:'required', pattern:'\\d{15}', maxlength:'15' });
+  addField('Enter exact 15-digit Unique Roll no (ALP 2024 CBAT held on 15-July-2025) <strong><u>[Note it down or Save it, So you can Later Check Updated Average & T-score]</u></strong><br>सटीक 15-अंकीय यूनीक रोल नंबर दर्ज करें (ALP 2024 CBAT 15-जुलाई-2025 को आयोजित) <strong><u>[इसे नोट कर लें या सेव कर लें, ताकि आप बाद में अपडेट किए गए औसत और टी-स्कोर की जांच कर सकें]</u></strong> :-', 'RollNo', 'text', { required:'required', pattern:'\\d{15}', maxlength:'15' });
   document.querySelector('#RollNo').parentElement.className = 'field col-12';
 
   // 3) Category
@@ -698,7 +811,7 @@ function buildForm(){
 
 
   // 4) CBT-2 Part A Marks (0..100)
-  addNumber('CBT-2 Part A Marks (As per Score Card Exact Marks) (0-100)<br>सीबीटी-2 भाग ए के अंक (स्कोर कार्ड के अनुसार सटीक अंक) :-', 'PartAMarks', 0, 100);
+  addNumber('CBT-2 Part A Marks (As per Score Card Exact Marks) (25-100)<br>सीबीटी-2 भाग ए के अंक (स्कोर कार्ड के अनुसार सटीक अंक) :-', 'PartAMarks', 25, 100);
 
   // 5) Zone
   addSelect('RRB Zone (as per application form)<br>आरआरबी जोन (आवेदन पत्र के अनुसार) :-', 'Zone', [
@@ -713,20 +826,20 @@ function buildForm(){
   // 7) Shift (1st/2nd/3rd)
   addSelect('Shift<br>शिफ्ट', 'Shift', ['1st','2nd','3rd'], { required:'required' });
 
-  // Batteries: Attempts + Accuracy
-  // 8) Memory (0..24), (0..100)
+  // Batteries: Attempts
+  // 8) Memory (0..24)
   addNumber('Battery 1 🧠 Memory (Figure-Find) <strong><u>Correct Attempts (0-24)</u></strong><br>बैटरी 1 🧠 मेमोरी (आकृति-खोज) <strong><u>सही प्रयास (0-24)</u></strong>', 'Mem_Correct', 0, 24);
 
-  // 9) Directions (0..20), (0..100)
+  // 9) Directions (0..20)
   addNumber('Battery 2 🕒 Directions (Watch) <strong><u>Correct Attempts (0-20)</u></strong><br>बैटरी 2 🕒 दिशा-निर्देश (देखें) <strong><u>सही प्रयास (0-20)</u></strong>', 'Dir_Correct', 0, 20);
 
-  // 10) Depth Perception (0..50), (0..100)
+  // 10) Depth Perception (0..50)
   addNumber('Battery 3 🧊 Depth Perception (Hidden Cube) <strong><u>Correct Attempts (0-50)</u></strong><br>बैटरी 3 🧊 गहराई बोध (हिडन क्यूब) <strong><u>सही प्रयास (0-50)</u></strong>', 'Depth_Correct', 0, 50);
 
-  // 11) Concentration (0..60), (0..100)
+  // 11) Concentration (0..60)
   addNumber('Battery 4 🎯 Concentration (Figure Placement) <strong><u>Correct Attempts (0-60)</u></strong><br>बैटरी 4 🎯 एकाग्रता (आकृति प्लेसमेंट) <strong><u>सही प्रयास (0-60)</u></strong>', 'Conc_Correct', 0, 60);
 
-  // 12) Perceptual Speed (0..72), (0..100)
+  // 12) Perceptual Speed (0..72)
   addNumber('Battery 5 ⚡ Perceptual Speed (Same Figure) <strong><u>Correct Attempts (0-72)</u></strong><br>बैटरी 5 ⚡ अवधारणात्मक गति (समान आकृति मिलान) <strong><u>सही प्रयास (0-72)</u></strong>', 'Perc_Correct', 0, 72);
 
   // submit
@@ -762,7 +875,7 @@ function validatePayload(p){
   
   if (!['UR','EWS','OBC','SC','ST'].includes(p.Category)) return 'Select Category';
 
-  if (!inRange(p.PartAMarks,0,100)) return 'CBT-2 Part A must be 0..100';
+  if (!inRange(p.PartAMarks,25,100)) return 'CBT-2 Part A must be 25..100';
   if (!p.Zone) return 'Select Zone';
   if (!p.ExamDate) return 'Enter Exam Date';
   if (!['1st','2nd','3rd'].includes(p.Shift)) return 'Select Shift';
@@ -788,7 +901,7 @@ async function onSubmitForm(){
   try{
     const exists = await checkRollExists(payload.RollNo);
     if (exists){
-      const ok = confirm('This roll number already exists.\nA) Click OK to overwrite and update report.\nB) Click Cancel to keep old data and just view existing report.');
+      const ok = confirm('Important Note: Do not use someone else\'s Unique RollNo. This will affect both your Filled Forms. Always use your own unique ALP CBAT RollNo.\nमहत्वपूर्ण नोट: किसी और का यूनिक रोल नंबर इस्तेमाल न करें। इससे आपके दोनों भरे हुए फॉर्म प्रभावित होंगे। हमेशा अपना खुद का ALP CBAT यूनिक रोल नंबर ही इस्तेमाल करें।\nThis roll number already exists.\nA) Click OK to overwrite and update report.\nB) Click Cancel to keep old data and just view existing report.');
       if (ok){
         const resp = await saveOrUpdate(payload, true);
         if (resp && resp.status==='ok' && resp.report){
@@ -831,6 +944,13 @@ function renderReport(data){
   const m = data.meta;
   const metaHtml = `
     <h2> 📊 Report for Roll: ${m.roll}</h2>
+    <div class="note-box">
+      <p>📝 <strong>Note:</strong> Save this <strong>RollNo</strong>.  
+      Later you can use it to see your <strong>Updated Average</strong> and <strong>T-Score</strong>.</p>
+
+      <p>📝 <strong>नोट:</strong> इस <strong>रोल नंबर</strong> को नोट कर लें या सेव कर लें।  
+      ताकि बाद में आप अपना <strong>अपडेटेड औसत</strong> और <strong>टी-स्कोर</strong> देख सकें।</p>
+    </div>
     <div class="row" style="flex-wrap:wrap">
       <span class="pill">Zone: <strong>${m.zone}</strong></span>
       <span class="pill">Category: <strong>${m.category}</strong></span>
