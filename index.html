@@ -558,6 +558,60 @@ input[type="date"]::after {
   .note-box strong {
     color: #d32f2f;
   }
+  .channel-buttons {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap; /* allows wrapping */
+  }
+
+  .channel-buttons .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 200px; /* same width */
+    padding: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: 0.2s ease-in-out;
+    text-align: center;
+  }
+
+  .btn-youtube {
+    background: #ff0000;
+    color: #fff;
+  }
+  .btn-youtube:hover {
+    background: #cc0000;
+  }
+
+  .btn-telegram {
+    background: #0088cc;
+    color: #fff;
+  }
+  .btn-telegram:hover {
+    background: #006f9e;
+  }
+
+  .btn svg {
+    vertical-align: middle;
+  }
+
+  /* ✅ Responsive: Stack vertically on small screens */
+  @media (max-width: 500px) {
+    .channel-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+    .channel-buttons .btn {
+      width: 90%; /* full width but with margin */
+      max-width: 300px;
+    }
+  }
 </style>
 </head>
 <body>
@@ -570,10 +624,37 @@ input[type="date"]::after {
     <a class="btn btn-outline-light btn-glow" href="./"> 
         <i class="fas fa-home"></i> Home
     </a>
+
     <div class="spacer"></div>
-    <a class="btn btn-telegram btn-glow me-2" href="https://t.me/Akki_Inspire" target="_blank" title="Join Telegram">
-      <strong><i class="fab fa-telegram"></i> Join our Telegram</strong>
-    </a>
+    <div class="channel-buttons">
+      <!-- YouTube Channel Button -->
+      <a href="https://www.youtube.com/channel/UCHS293AMtVG3HINTF5L-V3Q" target="_blank" class="btn btn-youtube">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 576 512">
+          <path d="M549.7 124.1c-6.3-23.7-24.9-42.3-48.6-48.6C465.3 64 288 64 288 64S110.7 64 
+                  74.9 75.5c-23.7 6.3-42.3 24.9-48.6 48.6C16 160 16 256 16 
+                  256s0 96 10.3 131.9c6.3 23.7 24.9 42.3 48.6 48.6C110.7 
+                  448 288 448 288 448s177.3 0 213.1-11.5c23.7-6.3 
+                  42.3-24.9 48.6-48.6C560 352 560 256 560 
+                  256s0-96-10.3-131.9zM232 336V176l142 
+                  80-142 80z"/>
+        </svg>
+        <span>YouTube Channel</span>
+      </a>
+
+      <!-- Telegram Channel Button -->
+      <a href="https://t.me/Akki_Inspire" target="_blank" class="btn btn-telegram">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 496 512">
+          <path d="M248 8C111 8 0 119 0 256s111 248 248 
+                  248 248-111 248-248S385 8 248 8zm116.4 
+                  169.9l-38.4 181.2c-2.9 13.2-10.7 16.5-21.6 
+                  10.3l-60-44.3-28.9 27.8c-3.2 3.2-5.9 5.9-12.1 
+                  5.9l4.3-61.2 111.3-100.5c4.8-4.3-1-6.7-7.4-2.4L153.9 
+                  279.5l-59-18.4c-12.8-4-13.1-12.8 2.7-19.1l230.6-89.1c10.7-3.9 
+                  20.1 2.6 16.2 19.1z"/>
+        </svg>
+        <span>Telegram Channel</span>
+      </a>
+    </div>
   </div>
 </nav>
 
@@ -648,7 +729,7 @@ input[type="date"]::after {
           Enter correct information again (Date, Part A Marks, Battery-wise Attempts, Zone, Category, Re-Exam Status, Shift).
         </li>
         <li>
-          <span class="bad">❌ Do not fill fake or incorrect details</span> (e.g. wrong Zone/Shift, Part A Marks, or putting all Battery Attempts as <b>0</b> just to check averages).  
+          <span class="bad">❌ Do not fill fake or incorrect details</span> (e.g. wrong Zone/Shift, Part A Marks, or putting all Battery Correct Attempts as <b>0</b> just to check averages).  
           <br>👉 Such actions will affect everyone’s <b>Average & T-Score</b>.
         </li>
       </ul>
