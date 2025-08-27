@@ -6,6 +6,9 @@
 <title>RRB ALP 2024 CBAT – T‑Score & Report</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
+  a {
+      text-decoration: none;
+  }
   :root {
     --bg: #0a0f1f;
     --card: #121834;
@@ -106,40 +109,40 @@
   }
 
   /* Style for date input with glowing white calendar icon */
-input[type="date"] {
-  position: relative;
-  padding-right: 40px; /* space for the icon */
-  background: #222;
-  color: #fff;
-  border: 1px solid #555;
-  border-radius: 5px;
-  font-size: 16px;
-  height: 40px;
-  box-shadow: inset 0 0 5px rgba(255,255,255,0.2);
-}
+  input[type="date"] {
+    position: relative;
+    padding-right: 40px; /* space for the icon */
+    background: #222;
+    color: #fff;
+    border: 1px solid #555;
+    border-radius: 5px;
+    font-size: 16px;
+    height: 40px;
+    box-shadow: inset 0 0 5px rgba(255,255,255,0.2);
+  }
 
-/* Remove default browser calendar icon */
-input[type="date"]::-webkit-calendar-picker-indicator {
-  opacity: 0;
-  cursor: pointer;
-  position: absolute;
-  right: 10px;
-  height: 100%;
-  width: 30px;
-}
+  /* Remove default browser calendar icon */
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    height: 100%;
+    width: 30px;
+  }
 
-/* Add custom white glowing calendar icon */
-input[type="date"]::after {
-  content: "📅";
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: white;
-  font-size: 18px;
-  pointer-events: none;
-  text-shadow: 0 0 8px rgba(255,255,255,0.8);
-}
+  /* Add custom white glowing calendar icon */
+  input[type="date"]::after {
+    content: "📅";
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 18px;
+    pointer-events: none;
+    text-shadow: 0 0 8px rgba(255,255,255,0.8);
+  }
 
   /* Layout */
   .container {
@@ -208,7 +211,7 @@ input[type="date"]::after {
   }
   
   .popup .panel {
-    width: min(700px, 92%);
+    width: min(500px, 92%);
     background: var(--card);
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 18px;
@@ -216,7 +219,7 @@ input[type="date"]::after {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
     animation: slideUp 0.4s ease;
   }
-  
+
   @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -571,7 +574,7 @@ input[type="date"]::after {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    width: 200px; /* same width */
+    width: 120px; /* same width */
     padding: 12px;
     font-size: 15px;
     font-weight: 600;
@@ -602,14 +605,14 @@ input[type="date"]::after {
   }
 
   /* ✅ Responsive: Stack vertically on small screens */
-  @media (max-width: 500px) {
+  @media (max-width: 175px) {
     .channel-buttons {
       flex-direction: column;
       align-items: center;
     }
     .channel-buttons .btn {
       width: 90%; /* full width but with margin */
-      max-width: 300px;
+      max-width: 115px;
     }
   }
 </style>
@@ -638,7 +641,7 @@ input[type="date"]::after {
                   256s0-96-10.3-131.9zM232 336V176l142 
                   80-142 80z"/>
         </svg>
-        <span>YouTube Channel</span>
+        <span> YouTube</span>
       </a>
 
       <!-- Telegram Channel Button -->
@@ -652,7 +655,7 @@ input[type="date"]::after {
                   279.5l-59-18.4c-12.8-4-13.1-12.8 2.7-19.1l230.6-89.1c10.7-3.9 
                   20.1 2.6 16.2 19.1z"/>
         </svg>
-        <span>Telegram Channel</span>
+        <span> Telegram</span>
       </a>
     </div>
   </div>
@@ -790,6 +793,49 @@ function formatDateISOtoDisplay(dateStr){
   return `${day}-${mon}-${year}`;
 }
 
+// Add this function to provide real-time validation
+function setupRealTimeValidation() {
+  const rollNoInput = qs('#RollNo');
+  if (rollNoInput) {
+    rollNoInput.addEventListener('input', function(e) {
+      const value = e.target.value;
+      const isValid = /^[1-9]\d{0,14}$/.test(value);
+      
+      // Remove any existing validation message
+      const existingMessage = qs('#rollNoValidation');
+      if (existingMessage) {
+        existingMessage.remove();
+      }
+      
+      if (value && !isValid) {
+        // Create validation message
+        const validationMsg = document.createElement('div');
+        validationMsg.id = 'rollNoValidation';
+        validationMsg.style.cssText = `
+          color: var(--danger);
+          font-size: 12px;
+          margin-top: 5px;
+          padding: 5px;
+          background: rgba(255, 85, 101, 0.1);
+          border-radius: 4px;
+          border-left: 3px solid var(--danger);
+        `;
+        validationMsg.textContent = 'Roll number must be 15 digits without leading zeros';
+        
+        // Insert after the input field
+        rollNoInput.parentNode.appendChild(validationMsg);
+        
+        // Add error styling to input
+        rollNoInput.style.borderColor = 'var(--danger)';
+      } else {
+        // Remove error styling
+        rollNoInput.style.borderColor = '';
+      }
+    });
+  }
+}
+
+
 /* ===== POPUP FLOW ===== */
 function onPopupAnswer(yes){
   qs('#firstPopup').style.display = 'none';
@@ -880,11 +926,19 @@ function buildForm(){
   };
 
   // 1) Re-Exam?
-  addSelect('Have you been called for a re-exam of RRB ALP 2024 CBAT Exam on 31 August?<br>क्या आपको 31 अगस्त को आरआरबी एएलपी 2024 सीबीएटी परीक्षा की पुनः परीक्षा के लिए बुलाया गया है?', 'ReExam', ['Yes','No'], { required:'required' });
+  addSelect('Have you been called for a re-exam of RRB ALP 2024 CBAT Exam on 31 August?<br>क्या आपको 31 अगस्त को आरआरबी एएलपी 2024 सीबीएटी परीक्षा की पुनः परीक्षा के लिए बुलाया गया है?',
+   'ReExam', ['Yes','No'], { required:'required' });
   document.querySelector('#ReExam').parentElement.className = 'field col-12';
 
   // 2) Roll No (15-digit)
-  addField('Enter exact 15-digit Unique Roll no (ALP 2024 CBAT held on 15-July-2025) <strong><u>[Note it down or Save it, So you can Later Check Updated Average & T-score]</u></strong><br>सटीक 15-अंकीय यूनीक रोल नंबर दर्ज करें (ALP 2024 CBAT 15-जुलाई-2025 को आयोजित) <strong><u>[इसे नोट कर लें या सेव कर लें, ताकि आप बाद में अपडेट किए गए औसत और टी-स्कोर की जांच कर सकें]</u></strong> :-', 'RollNo', 'text', { required:'required', pattern:'\\d{15}', maxlength:'15' });
+  addField('Enter exact 15-digit Unique Roll no (ALP 2024 CBAT held on 15-July-2025) <strong><u>[Note it down or Save it, So you can Later Check Updated Average & T-score]</u></strong><br>सटीक 15-अंकीय यूनीक रोल नंबर दर्ज करें (ALP 2024 CBAT 15-जुलाई-2025 को आयोजित) <strong><u>[इसे नोट कर लें या सेव कर लें, ताकि आप बाद में अपडेट किए गए औसत और टी-स्कोर की जांच कर सकें]</u></strong> :-',
+   'RollNo', 'text', { 
+    required:'required', 
+    pattern:'^[1-9]\\d{14}$', 
+    maxlength:'15', 
+    minlength: '15',
+    placeholder: 'Enter 15-digit roll number (no leading zeros)',
+    title: 'Please enter exactly 15 digits without any leading zeros' });
   document.querySelector('#RollNo').parentElement.className = 'field col-12';
 
   // 3) Category
@@ -908,23 +962,31 @@ function buildForm(){
   addSelect('Shift<br>शिफ्ट', 'Shift', ['1st','2nd','3rd'], { required:'required' });
 
   // Batteries: Attempts
-  // 8) Memory (0..24)
-  addNumber('Battery 1 🧠 Memory (Figure-Find) <strong><u>Correct Attempts (0-24)</u></strong><br>बैटरी 1 🧠 मेमोरी (आकृति-खोज) <strong><u>सही प्रयास (0-24)</u></strong>', 'Mem_Correct', 0, 24);
+  // 8) Memory (1..24)
+  addNumber('Battery 1 🧠 Memory (Figure-Find) <strong><u>Correct Attempts (1-24)</u></strong><br>बैटरी 1 🧠 मेमोरी (आकृति-खोज) <strong><u>सही प्रयास (1-24)</u></strong>',
+   'Mem_Correct', 1, 24);
 
-  // 9) Directions (0..20)
-  addNumber('Battery 2 🕒 Directions (Watch) <strong><u>Correct Attempts (0-20)</u></strong><br>बैटरी 2 🕒 दिशा-निर्देश (देखें) <strong><u>सही प्रयास (0-20)</u></strong>', 'Dir_Correct', 0, 20);
+  // 9) Directions (1..20)
+  addNumber('Battery 2 🕒 Directions (Watch) <strong><u>Correct Attempts (1-20)</u></strong><br>बैटरी 2 🕒 दिशा-निर्देश (देखें) <strong><u>सही प्रयास (1-20)</u></strong>',
+   'Dir_Correct', 1, 20);
 
-  // 10) Depth Perception (0..50)
-  addNumber('Battery 3 🧊 Depth Perception (Hidden Cube) <strong><u>Correct Attempts (0-50)</u></strong><br>बैटरी 3 🧊 गहराई बोध (हिडन क्यूब) <strong><u>सही प्रयास (0-50)</u></strong>', 'Depth_Correct', 0, 50);
+  // 10) Depth Perception (1..50)
+  addNumber('Battery 3 🧊 Depth Perception (Hidden Cube) <strong><u>Correct Attempts (1-50)</u></strong><br>बैटरी 3 🧊 गहराई बोध (हिडन क्यूब) <strong><u>सही प्रयास (1-50)</u></strong>',
+   'Depth_Correct', 1, 50);
 
-  // 11) Concentration (0..60)
-  addNumber('Battery 4 🎯 Concentration (Figure Placement) <strong><u>Correct Attempts (0-60)</u></strong><br>बैटरी 4 🎯 एकाग्रता (आकृति प्लेसमेंट) <strong><u>सही प्रयास (0-60)</u></strong>', 'Conc_Correct', 0, 60);
+  // 11) Concentration (1..60)
+  addNumber('Battery 4 🎯 Concentration (Figure Placement) <strong><u>Correct Attempts (1-60)</u></strong><br>बैटरी 4 🎯 एकाग्रता (आकृति प्लेसमेंट) <strong><u>सही प्रयास (1-60)</u></strong>',
+   'Conc_Correct', 1, 60);
 
-  // 12) Perceptual Speed (0..72)
-  addNumber('Battery 5 ⚡ Perceptual Speed (Same Figure) <strong><u>Correct Attempts (0-72)</u></strong><br>बैटरी 5 ⚡ अवधारणात्मक गति (समान आकृति मिलान) <strong><u>सही प्रयास (0-72)</u></strong>', 'Perc_Correct', 0, 72);
+  // 12) Perceptual Speed (1..72)
+  addNumber('Battery 5 ⚡ Perceptual Speed (Same Figure) <strong><u>Correct Attempts (1-72)</u></strong><br>बैटरी 5 ⚡ अवधारणात्मक गति (समान आकृति मिलान) <strong><u>सही प्रयास (1-72)</u></strong>',
+   'Perc_Correct', 1, 72);
 
   // submit
   qs('#submitBtn').onclick = onSubmitForm;
+
+  // Setup real-time validation after form is built
+  setTimeout(setupRealTimeValidation, 100);
 }
 
 function getFormData(){
@@ -951,25 +1013,26 @@ function getFormData(){
 
 function validatePayload(p){
   if (!['Yes','No'].includes(p.ReExam)) return 'Select Re-Exam Yes/No';
-  if (!/^\d{15}$/.test(p.RollNo)) return 'Roll No must be exactly 15 digits';
+  if (!/^[1-9]\d{14}$/.test(p.RollNo)) return 'Roll number must be exactly 15 digits without any leading zeros';
+
   const inRange = (x,min,max)=> Number.isFinite(x) && x>=min && x<=max;
   
   if (!['UR','EWS','OBC','SC','ST'].includes(p.Category)) return 'Select Category';
 
-  if (!inRange(p.PartAMarks,25,100)) return 'CBT-2 Part A must be 25..100';
+  if (!inRange(p.PartAMarks,25,100)) return 'CBT-2 Part A must be 25 - 100';
   if (!p.Zone) return 'Select Zone';
   if (!p.ExamDate) return 'Enter Exam Date';
   if (!['1st','2nd','3rd'].includes(p.Shift)) return 'Select Shift';
 
-  if (!inRange(p.Mem_Correct,0,24)) return 'Battery 1 Attempts 0..24';
+  if (!inRange(p.Mem_Correct,1,24)) return 'Battery 1 Attempts 1 - 24';
 
-  if (!inRange(p.Dir_Correct,0,20)) return 'Battery 2 Attempts 0..20';
+  if (!inRange(p.Dir_Correct,1,20)) return 'Battery 2 Attempts 1 - 20';
 
-  if (!inRange(p.Depth_Correct,0,50)) return 'Battery 3 Attempts 0..50';
+  if (!inRange(p.Depth_Correct,1,50)) return 'Battery 3 Attempts 1 - 50';
 
-  if (!inRange(p.Conc_Correct,0,60)) return 'Battery 4 Attempts 0..60';
+  if (!inRange(p.Conc_Correct,1,60)) return 'Battery 4 Attempts 1 - 60';
 
-  if (!inRange(p.Perc_Correct,0,72)) return 'Battery 5 Attempts 0..72';
+  if (!inRange(p.Perc_Correct,1,72)) return 'Battery 5 Attempts 1 - 72';
 
   return null;
 }
@@ -1045,7 +1108,7 @@ function renderReport(data){
   qs('#reportMeta').innerHTML = metaHtml;
 
   const rows = [
-    ['Battery', 'Mean', 'SD', 'Your Raw X', 'T‑Score'],
+    ['Battery', 'Mean', 'SD', 'Your (X)', 'T‑Score'],
     [' 🧠 ' + data.batteries.B1.name, fmt(data.batteries.B1.mean), fmt(data.batteries.B1.sd), data.batteries.B1.correct, data.batteries.B1.t],
     [' 🕒 ' + data.batteries.B2.name, fmt(data.batteries.B2.mean), fmt(data.batteries.B2.sd), data.batteries.B2.correct, data.batteries.B2.t],
     [' 🧊 ' + data.batteries.B3.name, fmt(data.batteries.B3.mean), fmt(data.batteries.B3.sd), data.batteries.B3.correct, data.batteries.B3.t],
