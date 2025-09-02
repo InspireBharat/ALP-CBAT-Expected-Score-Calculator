@@ -614,7 +614,143 @@
       width: 90%; /* full width but with margin */
       max-width: 115px;
     }
+    
   }
+
+  th.overall-score {
+    color: white;
+  }
+
+  /* Light theme css code */
+
+  body.light {
+    --bg: #f9f9f9;
+    --card: #ffffff;
+    --accent: #007bff;
+    --accent2: #28a745;
+    --text: #1a1a1a;
+    --muted: #555;
+    --warn: #ff9800;
+    --danger: #e53935;
+    --card-gradient: linear-gradient(145deg, rgba(0,0,0,.04), rgba(0,0,0,.01));
+    --input-bg: rgba(255, 255, 255, 0.9);
+    --success: #28a745;
+  }
+
+  body.light {
+    background: radial-gradient(1200px 600px at 10% -10%, #ffffff 0, #f0f0f0 60%);
+  }
+  /* ✅ Navbar in Light Mode */
+  body.light nav {
+    background: rgba(255, 255, 255, 0.9);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    body.light .brand,
+    body.light .nav-link,
+    body.light .home-btn {
+    color: var(--text);
+    }
+
+    /* ✅ Card & Popup */
+    body.light .card,
+    body.light .popup .panel {
+    background: var(--card);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    body.light h2, 
+    body.light h3 {
+    color: var(--text);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    /* ✅ Inputs */
+    body.light input,
+    body.light select {
+    background: var(--input-bg);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: var(--text);
+    }
+
+    body.light input:focus, 
+    body.light select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+    }
+
+    /* ✅ Tables */
+    body.light table {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    body.light thead {
+    background: linear-gradient(90deg, var(--accent), #559dff);
+    }
+    body.light tbody tr {
+    background: rgba(0,0,0,0.02);
+    }
+    body.light tbody tr:nth-child(even) {
+    background: rgba(0,0,0,0.05);
+    }
+    body.light tbody tr:hover {
+    background: rgba(0, 123, 255, 0.12);
+    }
+    body.light td {
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    body.light th {
+    color: #fff; /* keep header readable */
+    }
+
+    /* ✅ Note Box */
+    body.light .note-box {
+    border: 2px solid #fbc02d;
+    background: #fffbe6;
+    color: #333;
+    }
+    body.light .note-box strong {
+    color: #c62828;
+    }
+
+    /* ✅ Info Box */
+    body.light .info-box {
+    border: 2px solid #ddd;
+    background: #f9f9f9;
+    color: #333;
+    }
+    body.light .info-box h3 {
+    color: #111;
+    }
+
+    /* ✅ Footer */
+    body.light footer {
+    color: #444;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    }
+    /* ✅ Form Labels in Light Mode */
+    body.light label {
+    color: #000 !important; /* pure black */
+    }
+
+    /* ✅ Report Pills (span.badge, span.pill, etc.) */
+    body.light .pill,
+    body.light .badge,
+    body.light span[class*="pill"],
+    body.light span[class*="badge"] {
+    color: #000 !important;       /* black text */
+    background: #e0e0e0;          /* subtle gray bg for contrast */
+    border: 1px solid rgba(0,0,0,0.1);
+    }
+
+    /* ✅ Overall Score in Report */
+    body.light .overall-score,
+    body.light .total-score,
+    body.light .score-highlight {
+    color: #000 !important;  /* force black */
+    font-weight: 600;
+    }
 </style>
 </head>
 <body>
@@ -658,15 +794,17 @@
         <span> Telegram</span>
       </a>
     </div>
+    <button id="themeToggle" class="btn secondary" style="padding:8px 12px; border-radius:50%;">
+        <i class="fas fa-moon"></i>
+    </button>
   </div>
 </nav>
 
 <div class="container">
   <div class="card" id="hero">
     <h1>CBAT T‑Score & Overall Score (out of 30)</h1>
-    <h1>सीबीएटी टी-स्कोर और कुल स्कोर (30 में से)</h1>
-    <p>Auto-calculated from your Battery raw scores within <strong>Same (Zone + Exam Date + Shift)</strong> and grouped by <strong>Re‑Exam</strong> status.</p>
-    <p><strong>समान (जोन + परीक्षा तिथि + शिफ्ट)</strong> और <strong>पुनः परीक्षा</strong> स्थिति के अनुसार समूहीकृत की जाती है।, में आपके बैटरी रॉ स्कोर से स्वचालित रूप से गणना की जाती है</p>
+    <p>Auto-calculated Report from your Battery scores within <strong>Same (Zone + Exam Date + Shift + ReExam Status) And (Same Exam Date + Shift + ReExam Status).</strong></p>
+    <p><strong>समान (ज़ोन + परीक्षा तिथि + शिफ्ट + पुन: परीक्षा स्थिति) और (समान परीक्षा तिथि + शिफ्ट + पुन: परीक्षा स्थिति) के भीतर आपके बैटरी स्कोर से स्वचालित रूप से गणना की गई रिपोर्ट।</strong></p>
   </div>
 
   <!-- POPUP -->
@@ -724,6 +862,18 @@
     <p><em>All fields are mandatory. (You will get CSV on our Telegram channel.)</em></p>
 
     <div class="info-box">
+        <h3>⚠️ महत्वपूर्ण निर्देश</h3>
+        <ul>
+            <li>
+                <span class="good">✔️ केवल एक बार भरें</span>।
+                <u>विवरण अपडेट करने</u> के लिए, <b>उसी विशिष्ट CBAT रोल नंबर</b> का उपयोग करें जिसे आपने पहली बार भरा था।
+                सही जानकारी दोबारा दर्ज करें (दिनांक, भाग A के अंक, बैटरी-वार प्रयास, क्षेत्र, श्रेणी, पुन: परीक्षा की स्थिति, पाली)।
+            </li>
+            <li>
+                <span class="bad">❌ फर्जी या गलत विवरण न भरें</span> (जैसे, गलत क्षेत्र/पाली, भाग A के अंक, या केवल औसत देखने के लिए सभी बैटरी सही प्रयासों को <b>0 24 20 50 60 72</b> के रूप में लिखना)।
+                <br>👉 ऐसी कार्रवाइयों से सभी के <b>औसत और टी-स्कोर</b> पर असर पड़ेगा।
+            </li>
+        </ul>
       <h3>⚠️ Important Instructions</h3>
       <ul>
         <li>
@@ -732,7 +882,7 @@
           Enter correct information again (Date, Part A Marks, Battery-wise Attempts, Zone, Category, Re-Exam Status, Shift).
         </li>
         <li>
-          <span class="bad">❌ Do not fill fake or incorrect details</span> (e.g. wrong Zone/Shift, Part A Marks, or putting all Battery Correct Attempts as <b>0</b> just to check averages).  
+          <span class="bad">❌ Do not fill fake or incorrect details</span> (e.g. wrong Zone/Shift, Part A Marks, or putting all Battery Correct Attempts as <b>0 24 20 50 60 72</b> just to check averages).  
           <br>👉 Such actions will affect everyone’s <b>Average & T-Score</b>.
         </li>
       </ul>
@@ -749,9 +899,6 @@
   <div class="card" id="reportWrap">
     <div id="reportMeta"></div>
     <table id="reportTable"></table>
-    <div class="row" style="margin-top:20px">
-      <button class="btn" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i> Back to Top</button>
-    </div>
   </div>
 
   <!-- ADMIN -->
@@ -771,7 +918,7 @@
 
 <script>
 /* ===== CONFIG ===== */
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwS_z-uoiyp3Y95nqZ8E0wQoNr4fZiiVd5Jv_o44Impu2di-7nk22JOzL0I3qqnmgg8/exec"; // <-- set me
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxU1c_orQ5tFYrDXI4GHiM1xE_IeRxNkuY9sieYvdiuIVLaFDn1vXn8hnoEqIusQtILIQ/exec"; // <-- set me
 
 /* ===== UTIL ===== */
 const qs = sel => document.querySelector(sel);
@@ -843,9 +990,9 @@ function onPopupAnswer(yes){
     const roll = prompt('Enter your 15 digit ALP 2024 CBAT Unique Roll No, Which you filled while Submitting the Form :\nअपना 15 अंकों का ALP 2024 CBAT यूनिक रोल नंबर दर्ज करें, जो आपने फॉर्म जमा करते समय भरा था:');
     if (!roll) { qs('#formWrap').style.display = 'block'; return; }
     if (!/^\d{15}$/.test(roll)){ toast('Roll No must be exactly 15 digits.'); qs('#formWrap').style.display='block'; return; }
-    fetchReport(roll).then(r=>{
-      if (r.status==='ok'){
-        renderReport(r);
+    fetchReports(roll).then(({zoneReport, altReport})=>{
+      if (zoneReport.status==='ok' || altReport.status==='ok'){
+        renderReports(zoneReport, altReport);
       } else if (r.status==='not_found'){
         if (confirm('Roll not found. Try again? Click "Cancel" to fill the form.')) {
           onPopupAnswer(true);
@@ -883,9 +1030,14 @@ async function apiPostJson(obj){
   return res.text();
 }
 
-async function fetchReport(roll){
-  return apiGet({ action:'getReport', roll });
+async function fetchReports(roll){
+  const [r1, r2] = await Promise.all([
+    apiGet({ action:'getReport', roll }),     // zone-based
+    apiGet({ action:'getReportAlt', roll })   // without zone
+  ]);
+  return { zoneReport: r1, altReport: r2 };
 }
+
 async function checkRollExists(roll){
   const r = await apiPostJson({ type:'checkRoll', roll });
   return !!(r && r.exists);
@@ -1049,22 +1201,27 @@ async function onSubmitForm(){
       if (ok){
         const resp = await saveOrUpdate(payload, true);
         if (resp && resp.status==='ok' && resp.report){
-          renderReport(resp.report);
+          const altReport = await apiGet({ action:'getReportAlt', roll: payload.RollNo });
+          renderReports(resp.report, altReport);
           toast('Updated successfully ✔️');
         } else {
           toast('Update failed. Please try again.', 'error');
         }
       } else {
         // B) show existing report without saving
-        const rep = await fetchReport(payload.RollNo);
-        if (rep && rep.status==='ok') renderReport(rep);
+        const {zoneReport, altReport} = await fetchReports(payload.RollNo);
+        if ((zoneReport && zoneReport.status==='ok') || (altReport && altReport.status==='ok')){
+            renderReports(zoneReport, altReport);
+        }
+
         else toast('Could not load existing report. Try again later.', 'error');
       }
     } else {
       // new insert
       const resp = await saveOrUpdate(payload, false);
       if (resp && resp.status==='ok' && resp.report){
-        renderReport(resp.report);
+        const altReport = await apiGet({ action:'getReportAlt', roll: payload.RollNo });
+        renderReports(resp.report, altReport);
         toast('Submitted successfully ✔️');
       } else if (resp && resp.status==='exists'){
         // extremely rare race
@@ -1080,21 +1237,44 @@ async function onSubmitForm(){
 }
 
 /* ===== REPORT RENDER ===== */
-function renderReport(data){
-  // show report section
+function renderReports(zoneData, altData){
   qs('#reportWrap').style.display = 'block';
   qs('#formWrap').style.display = 'none';
 
-  const m = data.meta;
-  const metaHtml = `
-    <h2> 📊 Report for Roll: ${m.roll}</h2>
+  let html = '';
+
+  if(altData && altData.status==='ok'){
+    html += renderSingleReport(altData, 'Same (ExamDate + Shift + ReExam Status)');
+  }
+  if(zoneData && zoneData.status==='ok'){
+    html += renderSingleReport(zoneData, 'Same (Zone + ExamDate + Shift + ReExam Status)');
+  }
+
+  qs('#reportWrap').innerHTML = `
+    <div class="row" style="flex-wrap:wrap">
+        <p style="margin-top:8px">
+                <li>T‑Score: <code>T = 50 + 10 * (X − Mean) / SD</code>.</li>
+                <li> Std Dev SD = σ = √(∑(xi - μ)² / N).</li>
+                <li> Overall (X/30) = <code>(Σ T_i * 30) / 400</code>.</li>
+        </p>
+    </div>
     <div class="note-box">
       <p>📝 <strong>Note:</strong> Save this <strong>RollNo</strong>.  
       Later you can use it to see your <strong>Updated Average</strong> and <strong>T-Score</strong>.</p>
 
       <p>📝 <strong>नोट:</strong> इस <strong>रोल नंबर</strong> को नोट कर लें या सेव कर लें।  
       ताकि बाद में आप अपना <strong>अपडेटेड औसत</strong> और <strong>टी-स्कोर</strong> देख सकें।</p>
-    </div>
+    </div>` 
+    + html + `
+    <div class="row" style="margin-top:20px">
+      <button class="btn" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i> Back to Top</button>
+    </div>`;
+}
+
+function renderSingleReport(data, title){
+  const m = data.meta;
+  const metaHtml = `
+    <h3>Roll: ${m.roll} – ${title}</h3>
     <div class="row" style="flex-wrap:wrap">
       <span class="pill">Zone: <strong>${m.zone}</strong></span>
       <span class="pill">Category: <strong>${m.category}</strong></span>
@@ -1103,26 +1283,28 @@ function renderReport(data){
       <span class="pill">Group: <strong>${m.reportType}</strong></span>
       <span class="pill">Group Size: <strong>${m.groupSize}</strong></span>
     </div>
-    <p style="margin-top:8px">T‑Score formula: <code>T = 50 + 10 * (X − Mean) / SD</code>.<br> Standard Deviation SD = σ = √(∑(xi - μ)² / N).<br> Overall (X/30) = <code>(Σ T_i * 30) / 400</code>.</p>
   `;
-  qs('#reportMeta').innerHTML = metaHtml;
 
   const rows = [
-    ['Battery', 'Mean', 'SD', 'Your (X)', 'T‑Score'],
+    ['Battery', 'Mean', 'SD', 'Your (X)', 'T-Score'],
     [' 🧠 ' + data.batteries.B1.name, fmt(data.batteries.B1.mean), fmt(data.batteries.B1.sd), data.batteries.B1.correct, data.batteries.B1.t],
     [' 🕒 ' + data.batteries.B2.name, fmt(data.batteries.B2.mean), fmt(data.batteries.B2.sd), data.batteries.B2.correct, data.batteries.B2.t],
     [' 🧊 ' + data.batteries.B3.name, fmt(data.batteries.B3.mean), fmt(data.batteries.B3.sd), data.batteries.B3.correct, data.batteries.B3.t],
     [' 🎯 ' + data.batteries.B4.name, fmt(data.batteries.B4.mean), fmt(data.batteries.B4.sd), data.batteries.B4.correct, data.batteries.B4.t],
     [' ⚡ ' + data.batteries.B5.name, fmt(data.batteries.B5.mean), fmt(data.batteries.B5.sd), data.batteries.B5.correct, data.batteries.B5.t]
   ];
-  let html = `<thead><tr>${rows[0].map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>`;
+
+  let table = `<table class="table"><thead><tr>${rows[0].map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>`;
   for (let i=1;i<rows.length;i++){
     const r = rows[i];
-    html += `<tr>${r.map((c,j)=>`<td>${j===0?'<strong>'+c+'</strong>':c}</td>`).join('')}</tr>`;
+    table += `<tr>${r.map((c,j)=>`<td>${j===0?'<strong>'+c+'</strong>':c}</td>`).join('')}</tr>`;
   }
-  html += `</tbody><tfoot><tr><th colspan="4" style="text-align:right; color: white;"><strong> 📈 Overall Score (out of 30)</strong></th><th style="color: white;"><strong>${data.overall}</strong></th></tr></tfoot>`;
-  qs('#reportTable').innerHTML = html;
+  table += `</tbody><tfoot><tr><th colspan="4" style="text-align:right;" class="overall-score"><strong> 📈 Overall Score (out of 30)</strong></th><th class="overall-score"><strong>${data.overall}</strong></th></tr></tfoot></table>`;
+
+  return `<div class="card report-card">${metaHtml}${table}</div>`;
 }
+
+
 function fmt(x){ return (typeof x==='number') ? x.toFixed(2) : x; }
 
 function resetForm(){
@@ -1198,6 +1380,30 @@ function handleRoute() {
 
 document.addEventListener('DOMContentLoaded', handleRoute);
 window.addEventListener('hashchange', handleRoute); // ✅ switch instantly on # change
+
+// ===== THEME TOGGLE =====
+const themeBtn = qs('#themeToggle');
+
+function applyTheme(theme){
+  if(theme === 'light'){
+    document.body.classList.add('light');
+    themeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+  } else {
+    document.body.classList.remove('light');
+    themeBtn.innerHTML = '<i class="fas fa-moon"></i>';
+  }
+  localStorage.setItem('theme', theme);
+}
+
+// Load saved theme
+const savedTheme = localStorage.getItem('theme') || 'dark';
+applyTheme(savedTheme);
+
+// Toggle on click
+themeBtn.addEventListener('click', ()=>{
+  const newTheme = document.body.classList.contains('light') ? 'dark' : 'light';
+  applyTheme(newTheme);
+});
 
 </script>
 </body>
